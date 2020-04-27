@@ -20,6 +20,7 @@ const SocialLink: React.FunctionComponent<Props> = ({
                 background: none;
                 border: 0px;
                 cursor: pointer;
+                margin: 13px;
             }
 
             .socialLink:hover {
