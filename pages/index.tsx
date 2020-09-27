@@ -1,9 +1,19 @@
 import SocialLink from "../components/SocialLink";
 import Head from "next/head";
 
-const IndexPage = () => (
+type Props = {
+    siteConfig: SiteConfig
+}
+
+type SiteConfig = {
+    pageTitle: string,
+    pageDescription: string
+}
+
+const IndexPage = ({ siteConfig }: Props) => (
     <div>
         <Head>
+            <title>{siteConfig.pageTitle}</title>
             <link
                 href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap"
                 rel="stylesheet"
@@ -11,7 +21,7 @@ const IndexPage = () => (
         </Head>
         <div className="headlineContainer">
             <div className="space"></div>
-            <h1>cyalc.dev</h1>
+            <h1>{siteConfig.pageTitle}</h1>
             <div className="socialContainer">
                 <SocialLink
                     name="linkedin"
@@ -62,3 +72,16 @@ const IndexPage = () => (
 );
 
 export default IndexPage;
+
+export async function getStaticProps() {
+    const configData = await import(`../siteconfig.json`)
+
+    return {
+        props: {
+            siteConfig : {
+                pageTitle: configData.default.title,
+                pageDescription: configData.default.description
+            }
+        }
+    }
+}
