@@ -14,6 +14,7 @@ const IndexPage = ({ siteConfig }: Props) => (
     <div>
         <Head>
             <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta name="description" content={siteConfig.pageDescription} />
             <title>{siteConfig.pageTitle}</title>
             <link
                 href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap"
