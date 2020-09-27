@@ -13,6 +13,7 @@ type SiteConfig = {
 const IndexPage = ({ siteConfig }: Props) => (
     <div>
         <Head>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
             <title>{siteConfig.pageTitle}</title>
             <link
                 href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap"
@@ -78,7 +79,7 @@ export async function getStaticProps() {
 
     return {
         props: {
-            siteConfig : {
+            siteConfig: {
                 pageTitle: configData.default.title,
                 pageDescription: configData.default.description
             }
