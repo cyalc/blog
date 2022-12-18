@@ -1,29 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { GolManager } from "../apps/gol/golmanager";
+import { generateRandomState } from "../apps/gol/golstate";
 
 type Props = {};
 type State = { grid: number[][] };
 
 function GameOfLifePage() {
-  const [grid, setGrid] = useState([
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  ]);
+  const [state, setState] = useState<State>();
 
   const golManager = new GolManager();
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("setInterval");
-      setGrid((grid) => golManager.update(grid));
+      if (state?.grid !== undefined) {
+        console.log("update state");
+        setState({
+          grid: golManager.update(state.grid),
+        });
+      } else {
+        console.log("initialize state");
+        setState({
+          grid: generateRandomState(50, 50, 2),
+        });
+      }
     }, 300);
 
     return () => {
@@ -34,7 +33,7 @@ function GameOfLifePage() {
 
   return (
     <div>
-      {grid.map((row, i) => (
+      {state?.grid.map((row, i) => (
         <div key={i}>
           {row.map((col, j) => (
             <span key={j}>{col == 1 ? " o " : " - "}</span>
