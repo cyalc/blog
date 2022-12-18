@@ -10,8 +10,8 @@ const SocialLink: React.FunctionComponent<Props> = ({
   iconPath,
 }) => (
   <div className="socialLink">
-    <a href={url}>
-      <img src={iconPath} alt={name} />
+    <a rel="me" href={url}>
+      <img src={iconPath} alt={name} width="48" height="48" />
     </a>
     <style jsx>{`
       .socialLink {

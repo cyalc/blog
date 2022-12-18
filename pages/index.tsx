@@ -42,6 +42,11 @@ const IndexPage = ({ siteConfig }: Props) => (
             url="https://github.com/cyalc"
             iconPath="/github.svg"
           />
+          <SocialLink
+            name="mastodon"
+            url="https://mastodon.social/@cyalc"
+            iconPath="/mastodon.svg"
+          />
         </div>
         <div className="space"></div>
         <style jsx>{`
